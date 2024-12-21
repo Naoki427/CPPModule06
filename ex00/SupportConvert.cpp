@@ -74,10 +74,13 @@ bool SupportConvert::isChar(const std::string input) {
 bool SupportConvert::isInt(const std::string input) {
 	long num = 0;
 	int sign = (input[0] == '-') ? -1 : 1;
+	if (input[input.length() - 2] == '.' && input[input.length() - 1] == 'f')
+		return false;
 	for (size_t i = (input[0] == '-') ? 1 : 0; i < input.length(); i++)
 	{
-		if(!isDigit(input[i]))
+		if(!isDigit(input[i])) {
 			return false;
+		}
 		if(getIsOverflow() == 0)
 			num = num*10 + (input[i] - '0');
 		if(sign == 1 && num > 2147483647)
@@ -97,7 +100,8 @@ bool SupportConvert::isFloat(const std::string input) {
 	int digit = 0;
 	int decimal_digit = 0;
 	float scale = 1;
-	if (input[0] == '.' || input[input.length() - 2] == '.')
+
+	if (input[0] == '.' || (input[input.length() - 2] == '.' && input[input.length() - 1] == 'f'))
 		return false;
 	if (input[0] == '-' && input[1] == '.')
 		return false;

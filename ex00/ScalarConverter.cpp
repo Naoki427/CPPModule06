@@ -136,10 +136,22 @@ void putErrorLiteral(SupportConvert & sup) {
 	std::cout << "float: invalid input" << std::endl;
 	std::cout << "double: invalid input" << std::endl;
 	}
-	else{
-	std::cout << "char: Out of range" << std::endl;
-	std::cout << "int: Out of range" << std::endl;
-	std::cout << "float: Out of range" << std::endl;
-	std::cout << "double: Out of range" << std::endl;
+	else if (sup.getIsOverflow() == INT_OVER) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: Out of range" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+	}
+	else if (sup.getIsOverflow() == FLOAT_OVER || sup.getIsOverflow() == FLOAT_UNDER) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: Out of range" << std::endl;
+		std::cout << "double: impossible" << std::endl;
+	}
+	else if (sup.getIsOverflow() == DOUBLE_OVER || sup.getIsOverflow() == DOUBLE_UNDER) {
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: Out of range" << std::endl;
 	}
 }
